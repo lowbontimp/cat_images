@@ -29,12 +29,19 @@ my $i=0;
 my $j=0;
 
 $ps .= `$gmt4/psxy -R0/1/0/1 -JX20c -P -K -T`;
+
+my $nonext = 0 ;
+
 for (my $n=0; $n<=$#filelist; $n++){
 	chomp($filelist[$n]);
 	if (my ($file, $width, $fontsize, $dx2, $dy2, $dxl, $dyl, $label)=$filelist[$n]=~m{^\s*(.+)\s+($re)\s+($re)\s+($re)/($re)\s+($re)/($re)\s+(.+)\s*$}){
 		my @line = split(" ", $filelist[$n]);
-		my ($j,$i)=&int_divider($n, $col);
-		my ($x,$y)=($x_i+$i*$dx+$dx2,$y_i-$j*$dy+$dy2);
+		#my ($j,$i) = &int_divider($n, $col);
+		if ($filelist[$n] =~ m[\\nonext]){
+			$nonext++ ;
+		}	
+		my ($j,$i) = &int_divider($n - $nonext, $col);
+		my ($x,$y) = ($x_i+$i*$dx+$dx2,$y_i-$j*$dy+$dy2);
 		my $image_opt = "" ;
 		if ($filelist[$n] =~ m[\\frame{(.+)}]){
 			$image_opt = " -F$1" ;
