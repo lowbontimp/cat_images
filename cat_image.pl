@@ -44,8 +44,9 @@ for (my $n=0; $n<=$#filelist; $n++){
 		if ($filelist[$n] =~ m[\\frame{(.+)}]){
 			$image_opt = " -F$1" ;
 		}		
-		my ($label) = $label_and_opts =~ m{^(.*)\s*\\?} ;
-
+		$label_and_opts =~ s/\\\w+//g ;
+		my $label = $label_and_opts ;
+		#print STDERR "label: $label\n" ;
 		my ($j,$i) = &int_divider($n - $nonext, $col) ;
 		my ($x,$y) = ($x_i+$i*$dx+$dx2,$y_i-$j*$dy+$dy2) ;
 
