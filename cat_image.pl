@@ -12,7 +12,8 @@ if ($#ARGV != 1){
 }
 
 my $col = $ARGV[0] ;
-my @filelist=&read($ARGV[1]);
+my @filelist = &read($ARGV[1]);
+@filelist = &remove_skipped_line(@filelist) ;
 
 #my @filelist=&read("./list05.txt");
 
@@ -30,9 +31,6 @@ my $j=0;
 $ps .= `$gmt4/psxy -R0/1/0/1 -JX20c -P -K -T`;
 for (my $n=0; $n<=$#filelist; $n++){
 	chomp($filelist[$n]);
-	if ($filelist[$n] =~ m{^\s*\#}){
-		next ;
-	}
 	if (my ($file, $width, $fontsize, $dx2, $dy2, $dxl, $dyl, $label)=$filelist[$n]=~m{^\s*(.+)\s+($re)\s+($re)\s+($re)/($re)\s+($re)/($re)\s+(.+)\s*$}){
 		my @line = split(" ", $filelist[$n]);
 		my ($j,$i)=&int_divider($n, $col);
@@ -67,3 +65,13 @@ sub int_divider {
     return ($quota,$remainder);
 }
 
+sub remove_skipped_lines {
+	my (@inputs)=@_ ;
+	my @output ;
+	foreach my $input (@inputs){
+		if (not $input =~ m{^\s*\#}){
+			push(@output,$input) ;
+		}
+	}
+	return @output ;
+}
