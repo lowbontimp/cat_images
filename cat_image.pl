@@ -30,7 +30,7 @@ my $j = 0 ;
 
 $ps .= `$gmt4/psxy -R0/1/0/1 -JX20c -P -K -T`;
 
-my $nonext = 0 ;
+my $prev = 0 ;
 
 for (my $n=0; $n<=$#filelist; $n++){
 	chomp($filelist[$n]) ;
@@ -38,8 +38,8 @@ for (my $n=0; $n<=$#filelist; $n++){
 		my @line = split(" ", $filelist[$n]);
 		my $image_opt = "" ;
 		#my ($j,$i) = &int_divider($n, $col);
-		if ($filelist[$n] =~ m[\\nonext]){
-			$nonext++ ;
+		if ($filelist[$n] =~ m[\\prev]){
+			$prev++ ;
 		}
 		if ($filelist[$n] =~ m[\\frame{(.+)}]){
 			$image_opt = " -F$1" ;
@@ -47,7 +47,7 @@ for (my $n=0; $n<=$#filelist; $n++){
 		$label_and_opts =~ s/\\\w+//g ;
 		my $label = $label_and_opts ;
 		#print STDERR "label: $label\n" ;
-		my ($j,$i) = &int_divider($n - $nonext, $col) ;
+		my ($j,$i) = &int_divider($n - $prev, $col) ;
 		my ($x,$y) = ($x_i+$i*$dx+$dx2,$y_i-$j*$dy+$dy2) ;
 
 		$ps .= `$gmt4/psimage $file -Xa${x}c -Ya${y}c -W${width}c -C0/0/TL -P -K -O $image_opt`;
