@@ -13,7 +13,7 @@ if ($#ARGV != 1){
 
 my $col = $ARGV[0] ;
 my @filelist = &read($ARGV[1]);
-@filelist = &remove_skipped_line(@filelist) ;
+@filelist = &remove_skipped_lines(@filelist) ;
 
 #my @filelist=&read("./list05.txt");
 
