@@ -24,28 +24,31 @@ my ($x_i, $y_i)=("0","21"); # initial point
 ######################
 # internal variables #
 ######################
-my $ps;
-my $i=0;
-my $j=0;
+my $ps ;
+my $i = 0 ;
+my $j = 0 ;
 
 $ps .= `$gmt4/psxy -R0/1/0/1 -JX20c -P -K -T`;
 
 my $nonext = 0 ;
 
 for (my $n=0; $n<=$#filelist; $n++){
-	chomp($filelist[$n]);
-	if (my ($file, $width, $fontsize, $dx2, $dy2, $dxl, $dyl, $label)=$filelist[$n]=~m{^\s*(.+)\s+($re)\s+($re)\s+($re)/($re)\s+($re)/($re)\s+(.+)\s*$}){
+	chomp($filelist[$n]) ;
+	if (my ($file, $width, $fontsize, $dx2, $dy2, $dxl, $dyl, $label_and_opts)=$filelist[$n]=~m{^\s*(.+)\s+($re)\s+($re)\s+($re)/($re)\s+($re)/($re)\s+(.+)\s*$}){
 		my @line = split(" ", $filelist[$n]);
+		my $image_opt = "" ;
 		#my ($j,$i) = &int_divider($n, $col);
 		if ($filelist[$n] =~ m[\\nonext]){
 			$nonext++ ;
-		}	
-		my ($j,$i) = &int_divider($n - $nonext, $col);
-		my ($x,$y) = ($x_i+$i*$dx+$dx2,$y_i-$j*$dy+$dy2);
-		my $image_opt = "" ;
+		}
 		if ($filelist[$n] =~ m[\\frame{(.+)}]){
 			$image_opt = " -F$1" ;
 		}		
+		my ($label) = $label_and_opts =~ m{^(.*)\\} ;
+
+		my ($j,$i) = &int_divider($n - $nonext, $col) ;
+		my ($x,$y) = ($x_i+$i*$dx+$dx2,$y_i-$j*$dy+$dy2) ;
+
 		$ps .= `$gmt4/psimage $file -Xa${x}c -Ya${y}c -W${width}c -C0/0/TL -P -K -O $image_opt`;
 		if (not $filelist[$n] =~ m[\\notext]){
 			$ps .= `echo "0 0 $fontsize 0 1 BL $label" | $gmt4/pstext -R0/1/0/1 -J -O -K -N -Xa${x}c -Ya${y}c -D${dxl}c/${dyl}c`;
