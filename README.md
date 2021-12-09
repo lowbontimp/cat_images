@@ -16,7 +16,7 @@ Merging subfigures into one figure with labels, such as (a) and (b), using Gener
 ./c.eps 6 10 0/0 0/0 (c)
 ./d.eps 6 10 0/0 0/0 (d)
 ./legend.eps 7 10 0/0 0/0 \notext \frame{0.6p}
-#0           1 2  3         4     5       6
+#0           1 2  3   4   5       6
 ```
 * 0: path to input files
 * 1: width of file in cm

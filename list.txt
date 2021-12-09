@@ -1,8 +1,6 @@
-figure/04.Init/045.eps 6 10 0/0 0/0.0 (a)
-figure/02/045.eps 6 10 0/0 0/0.0 (b)
-figure/03.Qs/045.eps 6 10 0/0 0/0.0 (c)
-figure/04.Init/120.eps 6 10 0/0 0/0.0 (d)
-figure/02/120.eps 6 10 0/0 0/0.0 (e)
-figure/03.Qs/120.eps 6 10 0/0 0/0.0 (f)
-
-legend/06/legend01.eps 7 10 -0.35/0.2 0/0.0 \notext \frame{0.6p}
+./a.eps 6 10 0/0 0/0 (a)
+./b.eps 6 10 0/0 0/0 (b)
+./c.eps 6 10 0/0 0/0 (c)
+./d.eps 6 10 0/0 0/0 (d)
+./legend.eps 7 10 0/0 0/0 \notext \frame{0.6p}
+#0           1 2  3   4   5       6
