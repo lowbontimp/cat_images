@@ -2,9 +2,8 @@
 
 use strict ;
 use warnings ;
-use Regexp::Common ;
-my $re = $RE{num}{real} ;
-my $gmt4 = "/home/hbim/gmt/build/bin" ;
+my $re = "(?:(?i)(?:[-+]?)(?:(?=[.]?[0123456789])(?:[0123456789]*)(?:(?:[.])(?:[0123456789]{0,}))?)(?:(?:[E])(?:(?:[-+]?)(?:[0123456789]+))|))" ;
+my $gmt4 = "~/gmt4/bin" ;
 
 if ($#ARGV != 1){
 	print STDERR "usage: cat_image.pl num_col list.txt\n" ;
