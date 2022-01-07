@@ -41,5 +41,5 @@ Change the `$dx` and `$dy` in the script. Also, `$x_i` and `$y_i` are the initia
 
 ## Options
 * `\notext` : no label
-* `\frame{0.6}` : draw a boundary
+* `\frame{0.6}` : draw a boundary by 0.6p width
 * `\prev` : rewind order of subfigure by 1. It can be used to overlap two subfigures at the same position
