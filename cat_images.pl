@@ -45,6 +45,12 @@ for (my $n=0; $n<=$#filelist; $n++){
 		}
 		if ($filelist[$n] =~ m[\\frame\{(.+)\}]){
 			$image_opt = " -F$1" ;
+		}
+		if ($filelist[$n] =~ m[\\ysize]){
+			my ($wx,$wy) = &wxwy($file) ;
+			my $width2 = $width/$wy*$wx ;
+			print STDERR "$width -> $width2\n" ;
+			$width = $width2 ;			
 		}		
 		$label_and_opts =~ s/\\\w+//g ;
 		my $label = $label_and_opts ;
@@ -89,4 +95,36 @@ sub remove_skipped_lines {
 		}
 	}
 	return @output ;
+}
+
+sub wxwy {
+	my ($file)=@_ ;
+#%%HiResBoundingBox: 0 0 244.7500 249.5174
+#0                   1 2 3        4
+	my $wx = 1.0 ;
+	my $wy = 1.0 ;
+	open(my $f,"<$file") ;
+	while(my $l=<$f>){
+		if ($l =~ m{%%HiResBoundingBox:}){
+			#print STDERR "%%HiResBoundingBox used\n" ;
+			my @c = split(" ",$l) ;
+			my $x1 = $c[1] ;
+			my $y1 = $c[2] ;
+			my $x2 = $c[3] ;
+			my $y2 = $c[4] ;
+			$wx = $x2-$x1 ;
+			$wy = $y2-$y1 ;
+		}elsif($l =~ m{%%BoundingBox:}){
+			#print STDERR "%%BoundingBox used\n" ;
+			my @c = split(" ",$l) ;
+			my $x1 = $c[1] ;
+			my $y1 = $c[2] ;
+			my $x2 = $c[3] ;
+			my $y2 = $c[4] ;
+			$wx = $x2-$x1 ;
+			$wy = $y2-$y1 ;
+		}
+	}
+	close($f) ;
+	return ($wx,$wy) ;
 }
