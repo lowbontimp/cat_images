@@ -1,6 +1,6 @@
-./a.eps 6 10 0/0 0/0 (a)
-./b.eps 6 10 0/0 0/0 (b)
-./c.eps 6 10 0/0 0/0 (c)
-./d.eps 6 10 0/0 0/0 (d)
-./legend.eps 7 10 0/0 0/0 \notext \frame{0.6p}
-#0           1 2  3   4   5       6
+./fig/a.eps 6 10 0/0 0/0 (a) 
+./fig/b.eps 6 10 0/0 0/0 (b)
+./fig/c.eps 6 10 0/0 0/0 (c)
+./fig/d.eps 6 10 0/0 0/0 (d)
+./fig/e.eps 6 10 0/0 0/0 (e)
+./fig/f.eps 6 10 0/0 0/0 (f)

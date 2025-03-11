@@ -1,3 +1,3 @@
 #!/bin/sh
 
-./cat_images.pl 2 list.txt > tmp.ps
+./cat_images.pl 3 list.txt > fig.ps

@@ -16,9 +16,9 @@ my @filelist = &read($ARGV[1]);
 
 #my @filelist=&read("./list05.txt");
 
-my $dx = "6.2"; # in cm 
-my $dy = "3.9"; # in cm
-my ($x_i, $y_i)=("3","15"); # initial point
+my $dx = "6.4"; # in cm 
+my $dy = "4.2"; # in cm
+my ($x_i, $y_i)=("-1.5","15"); # initial point
 
 ######################
 # internal variables #
@@ -43,15 +43,15 @@ for (my $n=0; $n<=$#filelist; $n++){
 		if ($filelist[$n] =~ m[\\prev]){
 			$prev++ ;
 		}
-		if ($filelist[$n] =~ m[\\frame\{(.+)\}]){
-			$image_opt = " -F$1" ;
-		}
 		if ($filelist[$n] =~ m[\\ysize]){
 			my ($wx,$wy) = &wxwy($file) ;
 			my $width2 = $width/$wy*$wx ;
 			print STDERR "$width -> $width2\n" ;
 			$width = $width2 ;			
-		}		
+		}
+		if ($filelist[$n] =~ m[\\frame\{(.+)\}]){
+			$image_opt = " -F$1" ;
+		}
 		$label_and_opts =~ s/\\\w+//g ;
 		my $label = $label_and_opts ;
 		#print STDERR "label: $label\n" ;
