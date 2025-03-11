@@ -1,5 +1,11 @@
-# cat_images.pl (under developement)
+# cat_images.pl
 Merging subfigures into one figure with labels, such as (a) and (b), using Generic Mapping Tools.
+
+## Bounding the ps file
+One might need to bound the ps (postscript) file into an eps (encapsulated postscript) file
+```
+gmt psconvert -Te -A2p a.ps #output: a.eps
+```
 
 ## Example 1
 ```
